@@ -44,7 +44,10 @@ class Client {
     delete data.query
 
     const req = superagent.post(url.format(target)).send(data.body)
-
+    
+    console.log("request is: ")
+    console.log(req)
+    
     delete data.body
 
     Object.keys(data).forEach(key => {
@@ -53,8 +56,16 @@ class Client {
 
     req.end((err, res) => {
       if (err) {
+        console.log("req.end error is:")
+        console.log(err)
+        
+        console.log("req.end response is")
+        console.log(res)
+    
         this.logger.error(err)
       } else {
+        console.log("req.end response is")
+        console.log(res)
         this.logger.info(`${req.method} ${req.url} - ${res.status}`)
       }
     })
